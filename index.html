@@ -5,23 +5,92 @@
   <title>Web Sprint 2 Challenge</title>
   <script id="challenge">
     // 👉 CHALLENGE 1
-    function profileActivation(profile, reason) {
-
+    function profileActivation(profile,reason) {
+        // If the profile is active and no reason is provided, return the specified message
+        if (profile.active && reason === undefined) {
+            return "confirm status manually";
+        }
+    
+        // Toggle the active status of the profile
+        profile.active = !profile.active;
+    
+        // If deactivating the profile, assign the provided reason
+        if (!profile.active) {
+            profile.reason = reason;
+        } 
+        // If activating the profile, remove the reason property
+        else if (profile.active && profile.hasOwnProperty('reason')) {
+            delete profile.reason;
+        }
+    
+        // Return the updated profile
+        return profile;
     }
-
+    
     // 👉 CHALLENGE 2
     function mineSweeper(grid, x, y) {
-
+      let mineSweeper = [["üü•", "üü¶", "üü•"], ["üü¶", "üü•", "üü•"], ["üü•", "üü¶", "üü¶"]];
+      if (x < 1 || x > 3 || y < 1 || y > 3) {
+        return "invalid coordinates";
     }
+
+    // Adjust for zero-based indexing in the array
+    x = x - 1;
+    y = y - 1;
+
+    // Check the position in the grid
+    if (grid[y][x] === "🟥") {
+        return "🟥 💀"; // Mine
+    } else if (grid[y][x] === "🟦") {
+        return "🟦 🥳"; // Safe spot
+    } else {
+        // In case of an unexpected value in the grid
+        return "unknown grid value";
+    }
+}
+
+console.log(mineSweeper(grid, 1, 1)); // "üü• üíÄ"
+console.log(mineSweeper(grid, 2, 3)); // "üü¶ ü•≥"
+console.log(mineSweeper(grid, 4, 1)); // "invalid coordinates"
+    
 
     // 👉 CHALLENGE 3
+
+    
     function booleanize(obj) {
 
-    }
+        for (let key in obj) {
+      {
+          if (key.length >9) {
+            return "shorten all prop names to 9 chars or less";
+          }
+        for (let value in obj) {
+          if (obj[value]===0) {
+            obj[value] = false;
+          } else if (obj[value]===1) {
+            obj[value] = true;
+        } else if (obj[value]===null) {
+          delete obj[key,value]
+        }
+      }
+      return obj; 
+    } 
+  }
+  }
+
 
     // 👉 CHALLENGE 4
     function scrub(text, forbidden) {
-
+      if (text === "" || forbidden.length === 0) {
+        return text;
+      }
+      let words = text.split (" ");
+      for (let i = 0; i< words.length; i++) {
+        if (forbidden.includes(words[i])) {
+          words [i] = "x".repeat(words[i].length);
+        }
+      }
+      return words.join (" ")
     }
 
     // 👉 CHALLENGE 5 (bonus, NOT graded)
